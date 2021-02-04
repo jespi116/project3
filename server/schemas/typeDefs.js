@@ -60,8 +60,8 @@ const typeDefs = gql`
         user(username: String!): User
         me: User
         categories: [Category]
-        allProducts(sold: Boolean): [Product]
-        products(tags: String, name: String, sold: Boolean): [Product]
+        allProducts: [Product]
+        products(tags: String, name: String): [Product]
         product(_id: ID!): Product
         order(_id: ID!): Order
         checkout(products: [ID]!): Checkout

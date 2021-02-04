@@ -47,7 +47,7 @@ const resolvers = {
                 $regex: name
             }
         }
-        
+
         return Product.find(params).populate('category');
     },
     product: async (parent, { _id }) => {
