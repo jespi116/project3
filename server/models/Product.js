@@ -13,11 +13,14 @@ const productSchema = new Schema({
     type: String
   },
   image: {
-    type: String
+    type: String,
+    trim: true,
+    default: 'defaultimg.png'
   },
   price: {
     type: Number,
     required: true,
+    trim: true,
     min: 0.99
   },
   quantity: {
@@ -32,8 +35,8 @@ const productSchema = new Schema({
   },
   category: {
     type: Schema.Types.ObjectId,
-    ref: 'Category',
-    required: true
+    ref: 'Category'//,
+    //required: true
   },
   seller: {
     type: Schema.Types.ObjectId,

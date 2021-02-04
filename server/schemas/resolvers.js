@@ -27,10 +27,10 @@ const resolvers = {
         throw new AuthenticationError('Not logged in');
     },
     users: async () => {
-      return User.find();
+      return User.find().populate('products');
     },
     user: async (parent, {username}) => { 
-      return User.findOne({ username }) 
+      return User.findOne({ username }).populate('products'); 
     },
     allProducts: async (parent, { sold } ) => {
       const products = await Product.find( { sold: false } );
@@ -48,10 +48,10 @@ const resolvers = {
             }
         }
 
-        return Product.find(params).populate('category');
+        return Product.find(params).populate('category').populate('seller');
     },
     product: async (parent, { _id }) => {
-        return await (await Product.findById(_id)).populated('category');
+        return await (await Product.findById(_id)).populated('category').populate('seller');
     },
     order: async (parent, { _id }, context) => {
       if (context.user) {
@@ -75,8 +75,8 @@ const resolvers = {
       for (let i = 0; i < products.length; i++) {
         const product = await stripe.products.create({
           name: products[i].name,
-          description: products[i].description//,
-          //images: [`${url}/images/${products[i].image}`]
+          description: products[i].description,
+          images: [`${url}/images/${products[i].image}`]
         });
 
         const price = await stripe.prices.create({
@@ -127,7 +127,7 @@ const resolvers = {
     },
     addProduct: async (parent, args, { user }) => {
       if (user){
-        const product = await (await Product.create({ ...args, seller: user._id })).populate('seller');
+        const product = await (await Product.create({ ...args, seller: user._id })).populate('seller').populate('category');
 
         await User.findByIdAndUpdate(
           { _id: user._id},
@@ -163,13 +163,13 @@ const resolvers = {
           );
 
         await User.findByIdAndUpdate(
-          { _id: user._id},
+          { _id: product.seller},
           { $pull: { products: product._id }},
           { new: true }
         );
 
         await User.findByIdAndUpdate(
-          { _id: user._id},
+          { _id: product.seller},
           { $push: { sold: product._id }},
           { new: true }
         );
@@ -184,6 +184,8 @@ const resolvers = {
         const order = new Order({ products });
 
         await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
+
+        await User.findByIdAndUpdate()
 
         return order;
       }

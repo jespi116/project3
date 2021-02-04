@@ -61,7 +61,7 @@ const typeDefs = gql`
         me: User
         categories: [Category]
         allProducts: [Product]
-        products(tags: String, name: String): [Product]
+        products(category: ID, name: String): [Product]
         product(_id: ID!): Product
         order(_id: ID!): Order
         checkout(products: [ID]!): Checkout

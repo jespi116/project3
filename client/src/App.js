@@ -1,11 +1,46 @@
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { ApolloProvider } from '@apollo/react-hooks';
+import ApolloClient from 'apollo-boost';
+import Home from "./pages/Home";
+import Header from "./components/Header";
+import NoMatch from "./pages/NoMatch";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Profile from "./pages/Profile";
+import OrderHistory from "./pages/OrderHistory";
+import Success from "./pages/Success";
 
-import './App.css';
+const client = new ApolloClient({
+  request: (operation) => {
+    const token = localStorage.getItem('id_token')
+    operation.setContext({
+      headers: {
+        authorization: token ? `Bearer ${token}` : ''
+      }
+    })
+  },
+  uri: '/graphql',
+})
 
 function App() {
   return (
-    <div>
-      
-    </div>
+    <ApolloProvider client={client}>
+      <Router>
+        <div>
+        <Header />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/login" component={Login} />
+              <Route exact path="/signup" component={Signup} />
+              <Route exact path="/orderHistory" component={OrderHistory} />
+              <Route exact path="/success" component={Success} />
+              <Route exact path="/profile/:username?" component={Profile} />
+              <Route component={NoMatch} />
+          </Switch>
+        </div>
+      </Router>
+    </ApolloProvider>
   );
 }
 
