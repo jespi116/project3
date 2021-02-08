@@ -67,6 +67,15 @@ const ProductForm = () => {
     //    setCharacterCount(event.target.value.length);
     //  }
     //};
+
+    
+    const handleChange = event => {
+      const { name, value } = event.target;
+      setFormState({
+        ...formState,
+        [name]: value
+      });
+  };
   
     const handleFormSubmit = async event => {
       event.preventDefault();
@@ -89,27 +98,20 @@ const ProductForm = () => {
         console.log(e);
       }
     };
-
-    const handleChange = event => {
-        const { name, value } = event.target;
-        setFormState({
-          ...formState,
-          [name]: value
-        });
-    };
   
     return (
-      <div>
+      <div >
         <form
-          className="flex-row"
+          className="container-fluid d-flex flex-column col-5 ml-3 my-3"
           onSubmit={handleFormSubmit}
         >
-        <label>Product Name:</label>
-        <input placeholder="name" name="name" onChange={handleChange} />
-        <label>Price:</label>
-        <input name="price" placeholder="00.00" onChange={handleChange} />
-        <label>Category:</label>
-        <select name="category" value={formState.category} onChange={handleChange} >
+        <h3 className=" my-2">Create A New Listing!</h3>
+        <label>Product Name: </label>
+        <input className="py-1 my-2" placeholder="name" name="name" onChange={handleChange} />
+        <label>Price: </label>
+        <input className="py-1 my-2" name="price" placeholder="00.00" onChange={handleChange} />
+        <label>Category: </label>
+        <select className="py-2 my-2" name="category" value={formState.category} onChange={handleChange} >
           <option>Select Category</option>
             {categories.map(item => (
               <option
@@ -121,16 +123,17 @@ const ProductForm = () => {
             ))}
             
         </select>
+        <label className=" my-2">Description: </label>
         <textarea
           placeholder="Here's a new product..."
           name='description'
-          className="form-input col-12 col-md-9"
+          className="form-input"
           onChange={handleChange}
         ></textarea>
-        <p className='m-0'>
-          {error && <span className="ml-2">Something went wrong...</span>}
+        <p>
+          {error && <span>Something went wrong...</span>}
         </p>
-          <button className="btn col-12 col-md-3" type="submit">
+          <button className="btn m-1" type="submit">
             Submit
           </button>
         </form>

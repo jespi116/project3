@@ -4,4 +4,4 @@ module.exports = {
     swDest: './public/sw.js',
     clientsClaim: true,
     skipWaiting: true
-  };
+};

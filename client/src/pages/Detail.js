@@ -96,7 +96,7 @@ function Detail() {
           </Link>
 
           <h2>{currentProduct.name}</h2>
-
+          <label className="mt-4 font-weight-bold">Description: </label>
           <p>
             {currentProduct.description}
           </p>
@@ -109,10 +109,11 @@ function Detail() {
             <strong>Price:</strong>
             ${currentProduct.price}
             {" "}
-            <button onClick={addToCart}>
+            <button className="btn mx-2" onClick={addToCart}>
               Add to Cart
             </button>
             <button 
+            className="btn mx-2"
               disabled={!cart.find(p => p._id === currentProduct._id)} 
               onClick={removeFromCart}
             >
