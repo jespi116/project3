@@ -43,7 +43,7 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_PRODUCT = gql`
-  mutation addProduct($name: String!, $description: String, $price: String!, $image: String, $category: ID) {
+  mutation addProduct($name: String!, $description: String, $price: String!, $image: String, $category: ID!) {
     addProduct(name: $name, description: $description, image: $image, price: $price, category: $category) {
       _id
       name
@@ -72,6 +72,15 @@ export const SOLD = gql`
     sold(_id: $_id) {
       _id
       name
+    }
+  }
+`;
+
+export const ADD_FOLLOW = gql`
+  mutation addFollow($followId: ID!) {
+    addFollow(followId: $followId) {
+      _id
+      username
     }
   }
 `;

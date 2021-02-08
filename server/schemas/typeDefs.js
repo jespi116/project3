@@ -17,7 +17,7 @@ const typeDefs = gql`
     type Order {
         _id: ID
         purchaseDate: String
-        products(tags: String, name: String): [Product]
+        products: [Product]
     }
 
     type Checkout {
@@ -51,7 +51,7 @@ const typeDefs = gql`
     }
 
     type Auth {
-        token: ID!
+        token: ID
         user: User
     }
 
@@ -72,6 +72,8 @@ const typeDefs = gql`
         addUser(username: String!, email: String!, password: String!): Auth
         addProduct(name: String!, description: String, price: String!, image: String, quantity: Int, category: ID): Product
         removeProduct(_id: ID!): Product
+        addFollow(followId: ID!): User
+        removeFollow(followId: ID!): User
         sold(_id: ID!): Product
         addOrder(products: [ID]!): Order
     }

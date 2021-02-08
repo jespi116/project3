@@ -41,10 +41,11 @@ function CategoryMenu() {
   };
 
   return (
-    <div>
-      <h2>Choose a Category:</h2>
+    <div className='col-md col-lg-3 d-flex flex-column text-center borderr category'>
+      <h2 className="mt-2">Choose a Category:</h2>
       {categories.map(item => (
         <button
+          className='p-3 m-2 btn border text-monospace'
           key={item._id}
           onClick={() => {
             handleClick(item._id);

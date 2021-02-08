@@ -12,7 +12,7 @@ function ProductItem(item) {
     name,
     _id,
     price,
-    quantity,
+    category,
     seller
   } = item;
 
@@ -28,11 +28,11 @@ function ProductItem(item) {
       dispatch({
         type: UPDATE_CART_QUANTITY,
         _id: _id,
-        purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1
+        purchaseQuantity:  1
       });
       idbPromise('cart', 'put', {
         ...itemInCart,
-        purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1
+        purchaseQuantity:  1
       });
     } else {
       dispatch({
@@ -44,19 +44,21 @@ function ProductItem(item) {
   };
 
   return (
-    <div className="card px-1 py-1">
+    <div className="card px-2 py-2 col-3 mx-4 my-3 text-center">
       <Link to={`/products/${_id}`}>
         <img
+        className='image-fluid card-img'
           alt={name}
           src={`/uploads/${image}`}
         />
-        <p>{name}</p>
+        <p className="mt-3">{name}</p>
       </Link>
       <Link to={`/profile/${seller.username}`}>Seller: {seller.username}</Link>
+      <div className="my-2">Category: {category.name}</div>
       <div>
         <span>${price}</span>
       </div>
-      <button onClick={addToCart}>Add to cart</button>
+      <button className="btn border my-1" onClick={addToCart}>Add to cart</button>
     </div>
   );
 }

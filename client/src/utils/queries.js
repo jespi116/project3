@@ -16,7 +16,8 @@ export const QUERY_ME = gql`
     first
     last
     following {
-        username
+      _id
+      username
     }
     products {
         _id
@@ -25,12 +26,21 @@ export const QUERY_ME = gql`
         price
         image
         createdAt
+        category {
+          _id
+          name
+        }
     }
     sold {
+        _id
         name
         description
         price
         image
+        category {
+          _id
+          name
+        }
     }
     orders {
       _id
@@ -51,11 +61,13 @@ export const QUERY_ME = gql`
 export const QUERY_USER = gql`
 query user($username: String!){
   user(username: $username) {
+    _id
     username
     first
     last
     following {
-        username
+      _id
+      username
     }
     products {
         _id
@@ -133,6 +145,7 @@ export const QUERY_PRODUCTS = gql`
       }
       category {
         _id
+        name
       }
     }
   }

@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Product, Category } = require('../models');
+const { User, Product, Category, Order } = require('../models');
 const { signToken } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
@@ -13,9 +13,17 @@ const resolvers = {
           const userData = await User.findOne({ _id: context.user._id })
             .select('-__v -password')
             .populate('products')
+            .populate({
+              path:'products',
+              populate: 'category'
+            })
             .populate('following')
             .populate('messages')
             .populate('sold')
+            .populate({
+              path: 'sold',
+              populate: 'category'
+            })
             .populate({
               path: 'orders.products',
               populate: 'category'
@@ -51,7 +59,7 @@ const resolvers = {
         return Product.find(params).populate('category').populate('seller');
     },
     product: async (parent, { _id }) => {
-        return await (await Product.findById(_id)).populated('category').populate('seller');
+        return await (await Product.findById(_id)).populate('category').populate('seller');
     },
     order: async (parent, { _id }, context) => {
       if (context.user) {
@@ -135,6 +143,7 @@ const resolvers = {
           { new: true }
         );
         return product;
+        
     }
 
       throw new AuthenticationError('Log in!');
@@ -151,6 +160,30 @@ const resolvers = {
 
         await Product.findByIdAndDelete( _id );
         return product;
+      }
+      throw new AuthenticationError('Log in!');
+    },
+    addFollow: async (parent, { followId }, { user }) => {
+      if(user){
+        const follow = await User.findByIdAndUpdate(
+          { _id: user._id },
+          { $addToSet: { following: followId } },
+          { new: true }
+        ).populate('following');
+
+        return follow;
+      }
+      throw new AuthenticationError('Log in!');
+    },
+    removeFollow: async (parent, { followId }, { user }) => {
+      if(user){
+        const follow = await User.findByIdAndUpdate(
+          { _id: user._id },
+          { $pull: { following: followId } },
+          { new: true }
+        ).populate('following');
+
+        return follow;
       }
       throw new AuthenticationError('Log in!');
     },

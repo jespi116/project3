@@ -5,7 +5,7 @@ import Cart from '../components/Cart';
 
 const Home = () => {
     return (
-        <div className="container">
+        <div className="container-fluid d-flex flex-row flex-wrap justify-content-around">
             <CategoryMenu /> 
             <ProductList />
             <Cart />
