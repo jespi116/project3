@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import './bootstrap.css'
 import './index.css';
-import * as serviceWorker from './serviceWorker';
+import * as serviceWorker from './service-worker';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './utils/reducer'; 
@@ -26,5 +26,5 @@ ReactDOM.render(
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-
 serviceWorker.register();
+
