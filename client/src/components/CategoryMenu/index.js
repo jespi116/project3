@@ -42,7 +42,7 @@ function CategoryMenu() {
 
   return (
     <div className='col-md col-lg-3 d-flex flex-column text-center borderr category'>
-      <h2 className="mt-2">Choose a Category:</h2>
+      <h2 className="mt-2">Browse by Category:</h2>
       {categories.map(item => (
         <button
           className='p-3 m-2 btn border text-monospace'
@@ -54,6 +54,14 @@ function CategoryMenu() {
           {item.name}
         </button>
       ))}
+      <button
+          className='p-3 m-2 btn border text-monospace'
+          onClick={() => {
+            handleClick("");
+          }}
+        >
+          All Products
+        </button>
     </div>
   );
 }
