@@ -9,6 +9,11 @@ function Nav() {
       return (
         <ul className="d-flex flex-row">
           <li className="mx-3 text-dec">
+            <Link to="/OrderHistory">
+              Order History
+            </Link>
+          </li>
+          <li className="mx-3 text-dec">
             <Link to="/profile">
               My Profile
             </Link>

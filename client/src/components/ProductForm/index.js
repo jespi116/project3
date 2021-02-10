@@ -60,15 +60,7 @@ const ProductForm = () => {
         });
       }
     });
-  
-    //const handleChange = event => {
-    //  if (event.target.value.length <= 280) {
-    //    setFormState(event.target.value);
-    //    setCharacterCount(event.target.value.length);
-    //  }
-    //};
-
-    
+      
     const handleChange = event => {
       const { name, value } = event.target;
       setFormState({

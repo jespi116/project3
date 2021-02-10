@@ -12,6 +12,7 @@ export const QUERY_CATEGORIES = gql`
 export const QUERY_ME = gql`
 {
   me {
+    _id
     username
     first
     last
@@ -25,18 +26,8 @@ export const QUERY_ME = gql`
         description
         price
         image
+        sold
         createdAt
-        category {
-          _id
-          name
-        }
-    }
-    sold {
-        _id
-        name
-        description
-        price
-        image
         category {
           _id
           name
@@ -75,13 +66,12 @@ query user($username: String!){
         description
         price
         image
+        sold
         createdAt
-    }
-    sold {
-        name
-        description
-        price
-        image
+        category {
+          _id
+          name
+        }
     }
     orders {
       _id
@@ -116,6 +106,7 @@ export const QUERY_ALL_PRODUCTS = gql`
       image
       createdAt
       price
+      sold
       quantity
       seller {
         _id

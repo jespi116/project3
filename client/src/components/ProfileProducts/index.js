@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const ProfileProducts = (item) => {
     
-
     const {
         image,
         name,

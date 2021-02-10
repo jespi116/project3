@@ -53,12 +53,6 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Product'
       }
-    ],
-  sold: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Product'
-      }
     ]
 });
 

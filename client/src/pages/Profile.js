@@ -12,26 +12,25 @@ import Cart from '../components/Cart';
 
 const Profile = () => {
 
+  const [ soldBtn, setSoldBtn ] = useState(false);
+
+  const [addFollow] = useMutation(ADD_FOLLOW);
+
   const { username: userParam } = useParams();
 
   const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
     variables: { username: userParam }
   });
-  
-  const [addFollow] = useMutation(ADD_FOLLOW);
-
 
   const user = data?.me || data?.user || {};
   // redirect to personal profile page if username is the logged-in user's
 
-  const [products, setProducts] = useState([]);
-  
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
     return <Redirect to="/profile" />;
-  }
+  }  
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <h1 className="jumbotron jumbotrom-fluid container">Loading...</h1>;
   }
 
   if (!user?.username) {
@@ -42,7 +41,6 @@ const Profile = () => {
     );
   }
   
-
   const handleClick = async () => {
     try {
       await addFollow({
@@ -53,12 +51,22 @@ const Profile = () => {
     }
   };
 
-  const forSale = ()=> {
-    setProducts(user.products);
+  function forSale() {
+    setSoldBtn(false);
+    return soldBtn;
   }
 
-  const soldProd= () => {
-    setProducts(user.sold);
+  function sold() {
+    setSoldBtn(true);
+    return soldBtn;
+  }
+
+  function filterProducts() {
+    if (!soldBtn) {
+      return user.products.filter(product => product.sold === false);
+    }
+
+    return user.products.filter(product => (product.sold === true));
   }
 
   return (
@@ -79,19 +87,19 @@ const Profile = () => {
       <div>
         <h5 className="mt-2">Choose which of your products you'd like to view!</h5>
         <div>
-        <button className="btn m-3" onClick={forSale}>Products For Sale</button>
-        <button className="btn m-3" onClick={soldProd}>Sold Products</button>
+        <button className="btn m-3" onClick={forSale} >Products For Sale</button>
+        <button className="btn m-3" onClick={sold} >Sold Products</button>
         </div>
       </div>
       )}
       <div className="d-flex flex-row flex-wrap">
         <div className="col-8">
           <h2>{userParam ? "User's" : "Your"} Products:</h2>
-            {products?.length ? (
+            {user.products?.length ? (
               <div className="d-flex flex-row flex-wrap text-center">
-              {products?.map(product => (
+              {filterProducts().map(product => (
                 <ProfileProducts
-                  key= {product._id}
+                  key= {product._id} 
                   _id={product._id}
                   image={product.image}
                   name={product.name}
@@ -107,8 +115,10 @@ const Profile = () => {
           <img src={spinner} alt="loading" />: null}
         </div>
         <div className="col-4">
+            <h5>
+              {user.username}'s Following List
+            </h5>
           <FollowList
-            username={user.username}
             following={user.following}
           />
         </div>
