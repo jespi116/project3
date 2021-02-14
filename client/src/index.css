@@ -6,6 +6,13 @@ body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+.cart {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 9999;
+}
+
 .text-dec {
   text-decoration: none;
   list-style: none;
