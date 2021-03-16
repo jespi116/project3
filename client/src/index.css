@@ -6,11 +6,20 @@ body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.cart {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  z-index: 9999;
+.btn2 {
+  font-size: 1.3vw;
+}
+
+.btn-text {
+  font-size: .8rem;
+}
+
+.cart-body {
+  border-top: 1px solid gray;
+}
+
+.cart-item {
+  border-bottom: 1px solid gray;
 }
 
 .text-dec {
@@ -22,11 +31,13 @@ body {
 }
 
 .borderr {
+  padding-bottom: 20px;
   border-right: 2px solid #131200;
+  border-bottom: 2px solid #131200;
 }
 
 img {
-  max-width: 300px;
+  max-width: 600px;
 }
 
 .link {
@@ -42,7 +53,7 @@ img {
 .header {
   background-color: #22aaa1;
   border-bottom: 2px solid #131200;
-  height: 100px;
+  min-height: 100px;
   
 }
 
@@ -85,4 +96,15 @@ a:active {
   color: #22aaa1;
   text-decoration: underline;
   text-shadow: none;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .btn2 {
+    font-size: 3.2vw;
+  }
+
+  .borderr {
+    margin-bottom: 10px;
+    border-right: none;
+  }
 }

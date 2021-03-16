@@ -48,11 +48,12 @@ function ProductList() {
   }
 
   return (
-    <div className="my-2 col-9">
-      <h2>Users' Listings:</h2>
+    <div className="my-2 col-md-9">
       {state.products.length ? (
-        <div className='d-flex flex-row flex-wrap'>
-            {filterProducts().map(product => (
+        <div className='container-fluid mx-2'>
+          <div className="row">
+            <h2 className="col-12 justify-content-center justify-content-md-start">Product Listings:</h2>
+              {filterProducts().map(product => (
                 <ProductItem
                   key={product._id}
                   _id={product._id}
@@ -63,7 +64,8 @@ function ProductList() {
                   category={product.category}
                   seller={product.seller}
                 />
-            ))}
+              ))}
+          </div>
         </div>
       ) : (
         <h3>You haven't added any products yet!</h3>

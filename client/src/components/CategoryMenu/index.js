@@ -41,27 +41,35 @@ function CategoryMenu() {
   };
 
   return (
-    <div className='col-md col-lg-3 d-flex flex-column text-center borderr category'>
-      <h2 className="mt-2">Browse by Category:</h2>
-      {categories.map(item => (
-        <button
-          className='p-3 m-2 btn border text-monospace'
-          key={item._id}
-          onClick={() => {
-            handleClick(item._id);
-          }}
-        >
-          {item.name}
-        </button>
-      ))}
-      <button
-          className='p-3 m-2 btn border text-monospace'
-          onClick={() => {
-            handleClick("");
-          }}
-        >
-          All Products
-        </button>
+    <div className='col-md-3 borderr'>
+      <div className="container-fluid">
+        <div className="row justify-content-center">
+          <h2 className="mt-2 col-12 text-center">Browse by Category:</h2>
+          {categories.map(item => (
+            <div className="col-md-12 col-sm-3 col-6">
+              <button
+                className='my-2 btn p-3 text-monospace btn-text w-100'
+                key={item._id}
+                onClick={() => {
+                  handleClick(item._id);
+                }}
+              >
+                {item.name}
+              </button>
+            </div>
+          ))}
+          <div className="col-md-12 col-sm-3 col-6">
+            <button
+                className='my-2 btn p-3 text-monospace btn-text w-100'
+                onClick={() => {
+                  handleClick("");
+                }}
+              >
+                All
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

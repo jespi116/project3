@@ -15,14 +15,14 @@ const CartItem = ({ item }) => {
     };
 
   return (
-    <div className="flex-row">
+    <div className="d-flex cart-item py-2">
       <div>
         <img
           src={`/images/${item.image}`}
           alt=""
         />
       </div>
-      <div>
+      <div className="d-flex justify-content-between">
         <div>{item.name}, ${item.price} </div>
           <span
             role="img"

@@ -44,21 +44,23 @@ function ProductItem(item) {
   };
 
   return (
-    <div className="card px-2 py-2 col-3 mx-4 my-3 text-center">
-      <Link to={`/products/${_id}`}>
-        <img
-        className='image-fluid card-img'
-          alt={name}
-          src={`/uploads/${image}`}
-        />
-        <p className="mt-3">{name}</p>
-      </Link>
-      <Link to={`/profile/${seller.username}`}>Seller: {seller.username}</Link>
-      <div className="my-2">Category: {category.name}</div>
-      <div>
-        <span>${price}</span>
+    <div className="col-md-4">
+      <div className="mx-2 my-4 p-3 card text-center">
+        <Link to={`/products/${_id}`}>
+          <img
+          className='image-fluid card-img'
+            alt={name}
+            src={`/uploads/${image}`}
+          />
+          <p className="mt-3">{name}</p>
+        </Link>
+        <Link to={`/profile/${seller.username}`}>Seller:<br/>{seller.username}</Link>
+        <div className="my-2">Category:<br/>{category.name}</div>
+        <div>
+          <span>${price}</span>
+        </div>
+        <button className="btn btn2 border my-2" onClick={addToCart}>Add to cart</button>
       </div>
-      <button className="btn border my-1" onClick={addToCart}>Add to cart</button>
     </div>
   );
 }

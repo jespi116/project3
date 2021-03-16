@@ -5,10 +5,12 @@ import Cart from '../components/Cart';
 
 const Home = () => {
     return (
-        <div className="container-fluid d-flex flex-row flex-wrap justify-content-around">
+        <div className="container-fluid">
             <Cart />
-            <CategoryMenu /> 
-            <ProductList />
+            <div className="row">
+                <CategoryMenu /> 
+                <ProductList />
+            </div>
         </div>
     )
 }
