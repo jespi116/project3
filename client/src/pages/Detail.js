@@ -26,6 +26,8 @@ function Detail() {
   
   const { products, cart } = state;
 
+  const { sold } = currentProduct;
+
   const addToCart = () => {
     const itemInCart = cart.find((cartItem) => cartItem._id === id)
   
@@ -59,6 +61,8 @@ function Detail() {
     // upon removal from cart, delete the item from IndexedDB using the `currentProduct._id` to locate what to remove
     idbPromise('cart', 'delete', { ...currentProduct });
   };
+
+  
   
   useEffect(() => {
     // already in global store
@@ -109,6 +113,7 @@ function Detail() {
             <strong>Price:</strong>
             ${currentProduct.price}
             {" "}
+            
             <button className="btn mx-2" onClick={addToCart}>
               Add to Cart
             </button>
@@ -119,6 +124,7 @@ function Detail() {
             >
               Remove from Cart
             </button>
+            
           </p>
         </div>
       ) : null}

@@ -83,7 +83,8 @@ const ProfileProducts = (item) => {
       };
 
     return(
-    <div className="card m-3 col-3">
+    <div className="col-md-4">
+      <div className="my-3 p-3 card text-center">
         <Link to={`/products/${_id}`}>
         <img
           className="image-fluid card-img"
@@ -92,16 +93,17 @@ const ProfileProducts = (item) => {
         />
         <p>{name}</p>
       </Link>
-      <div>Category: {category.name}</div>
-      <div>
+      <div>Category:<br/>{category.name}</div>
+      <div className="my-2">
         <span>${price}</span>
       </div>
       {userParam && (
-        <button className="btn p-1 mb-2" onClick={addToCart}>Add to cart</button>
+        <button className="btn p-1 my-1" onClick={addToCart}>Add to cart</button>
       )}
       {!userParam && (
-        <button className="btn p-1 m-2" onClick={deletePro}>Delete Listing</button>
+        <button className="btn btn2 p-1 my-1" onClick={deletePro}>Delete Listing</button>
       )}
+      </div>
     </div>
     )
 }

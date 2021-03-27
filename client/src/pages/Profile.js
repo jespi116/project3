@@ -70,33 +70,34 @@ const Profile = () => {
   }
 
   return (
-    <div className="container-fluid ">
-      <div className="flex-row mb-3">
-        <h2>
-          Viewing {userParam ? `${user.username}'s` : 'your'} profile.
-        </h2>
+    <div className="container-fluid m-4">
+      <h2 className="mb-3 row">
+        Viewing {userParam ? `${user.username}'s` : 'your'} profile.
+      </h2>
+      <div className="row mb-3">
+        
+        <div className="col-md-8 col-12">
+          
 
-        {userParam && (
-          <button className="btn" onClick={handleClick}>
-            Add Follow
-          </button>
-        )}
-      </div>
-      
-        {!userParam && (
-      <div>
-        <h5 className="mt-2">Choose which of your products you'd like to view!</h5>
-        <div>
-        <button className="btn m-3" onClick={forSale} >Products For Sale</button>
-        <button className="btn m-3" onClick={sold} >Sold Products</button>
-        </div>
-      </div>
-      )}
-      <div className="d-flex flex-row flex-wrap">
-        <div className="col-8">
-          <h2>{userParam ? "User's" : "Your"} Products:</h2>
+          {!userParam && (
+          <div>
+            <h5 className="mt-2 ml-3">Choose which of your products you'd like to view below:</h5>
+            <div className="mx-2">
+              <button className="btn m-3" onClick={forSale} >Products For Sale</button>
+              <button className="btn m-3" onClick={sold} >Sold Products</button>
+            </div>
+          </div>
+          )}
+
+          {userParam && (
+            <button className="btn" onClick={handleClick}>
+              Add Follow
+            </button>
+          )}
+        
+          <h2 className="mt-3">{userParam ? "User's" : "Your"} Products:</h2>
             {user.products?.length ? (
-              <div className="d-flex flex-row flex-wrap text-center">
+              <div className="row mx-1 my-4 justify-content-center justify-content-md-start">
               {filterProducts().map(product => (
                 <ProfileProducts
                   key= {product._id} 
@@ -113,22 +114,27 @@ const Profile = () => {
           ) : ( <h3>No Products To Show Currently!</h3>)}
           { loading ? 
           <img src={spinner} alt="loading" />: null}
+        
+            
+      
+          {!userParam && (
+          <div className="mb-3">
+              <ProductForm />
+          </div>
+          )}
         </div>
-        <div className="col-4">
-            <h5>
-              {user.username}'s Following List
-            </h5>
-          <FollowList
-            following={user.following}
-          />
+        <div className="col-md-4 col-12">
+          <h5>
+            {user.username}'s Following List
+          </h5>
+          <div className="container">
+            <FollowList
+              following={user.following}
+            />
+          </div>
         </div>
-      </div>
-      {!userParam && (
-      <div className="mb-3">
-          <ProductForm />
-      </div>
-      )}
       <Cart /> 
+      </div>
     </div>
   );
 };

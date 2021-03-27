@@ -139,47 +139,50 @@ const ProductForm = () => {
     return (
       <Fragment>
         <form
-          className="container-fluid d-flex flex-column col-5 ml-3 my-3"
+          className="container-fluid"
           onSubmit={handleFormSubmit}
         >
-        <h3 className=" my-2">Create A New Listing!</h3>
-        <label>Product Name: </label>
-        <input className="py-1 my-2" placeholder="Name" name="name" onChange={handleChange} />
-        <label>Product Image: </label>
-        <div className="custom-file py-1 my-4">
-          <input className="custom-file-input" placeholder="Product Image" name="image" type="file" onChange={handleFile} />
-          <label className="custom-file-label">
-            {formState.image}
-          </label>
-        </div>
-        <label>Price: </label>
-        <input className="py-1 my-2" name="price" placeholder="00.00" onChange={handleChange} />
-        <label>Category: </label>
-        <select className="py-2 my-2" name="category" value={formState.category} onChange={handleChange} >
-          <option>Select Category</option>
-            {categories.map(item => (
-              <option
-                value={item._id}
-                key={item._id}
-              >
-                {item.name}
-              </option>
-            ))}
+          <h3 className="row">Create A New Listing!</h3>
+          <div className="mx-3">
             
-        </select>
-        <label className=" my-2">Description: </label>
-        <textarea
-          placeholder="Here's a new product..."
-          name='description'
-          className="form-input"
-          onChange={handleChange}
-        ></textarea>
-        <p>
-          {error && <span>Something went wrong...</span>}
-        </p>
-          <button className="btn m-1" type="submit">
-            Submit
-          </button>
+            <label className="row">Product Name: </label>
+            <input className="row py-1 my-2 w-100" placeholder="Name" name="name" onChange={handleChange} />
+            <label className="row">Product Image: </label>
+            <div className="custom-file py-1 my-4 row w-100">
+              <input className="custom-file-input" placeholder="Product Image" name="image" type="file" onChange={handleFile} />
+              <label className="custom-file-label">
+                {formState.image}
+              </label>
+            </div>
+            <label className="row">Price: </label>
+            <input className="py-1 my-2 row w-100" name="price" placeholder="00.00" onChange={handleChange} />
+            <label className="row">Category: </label>
+            <select className="py-2 my-2 row w-100" name="category" value={formState.category} onChange={handleChange} >
+              <option>Select Category</option>
+                {categories.map(item => (
+                  <option
+                    value={item._id}
+                    key={item._id}
+                  >
+                    {item.name}
+                  </option>
+                ))}
+
+            </select>
+            <label className="row my-2">Description: </label>
+            <textarea
+              placeholder="Here's a new product..."
+              name='description'
+              className="form-input row w-100"
+              onChange={handleChange}
+            ></textarea>
+            <p className="row"> 
+              {error && <span>Something went wrong...</span>}
+            </p>
+              <button className="row btn my-1 w-100" type="submit">
+                Submit
+              </button>
+            </div>
         </form>
       </Fragment>
     );
